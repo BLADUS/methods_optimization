@@ -1,22 +1,11 @@
+import math
 import OptimModule
 from tabulate import tabulate
 
-def fib(n):
-        if n == 0:
-            return 0
-        elif n == 1:
-            return 1
-        else:
-            return fib(n - 1) + fib(n - 2)
-        
-def calculateFibonachiX(a, b, n, n1, n2):
-    n=fib(n)
-    n1=fib(n1)
-    n2=fib(n2)
-    x1 = a + (b-a)*(n/n2)
-    x2 = a + (b-a)*(n1/n2)
+def calculateGoldenSectionX(a,b):
+    x1 = a + ((3 - math.sqrt(5)) / 2) * (b - a)
+    x2 = a + b - x1
     return x1, x2
-
 
 a = -0.6
 b = 1
@@ -27,7 +16,7 @@ table = []  # Создаем пустую таблицу для хранения
 
 
 while (b - a) / 2 > eps:
-    x1, x2 = calculateFibonachiX(a, b, 6, 7, 8)
+    x1, x2 = calculateGoldenSectionX(a, b)
     f1, f2 = OptimModule.functions(x1, x2)
     sr = ">" if f1 > f2 else "<"
 
@@ -49,5 +38,5 @@ headers = ["Итерация", "a", "b", "(b-a)/2", "x1", "x2", "f(x1)", "f(x2)"
 print(tabulate(table, headers=headers, tablefmt="grid"))
 
 xMin = (b+a)/2
-print("x* =", xMin)
-print("y* =",OptimModule.functions(xMin))
+print("x*=", xMin)
+print("y*",OptimModule.functions(xMin))
