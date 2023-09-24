@@ -1,14 +1,20 @@
 import math
 from tabulate import tabulate
+import sympy as sp
 
 
-def functions(*x):
-    if len(x)==2:
-        x1, x2 = x
-        return x1 - math.log(x1) + 5, x2 - math.log(x2) + 5
-    else :
-        xmin = x[0]
-        return 3*xmin**4 + math.exp(-2*xmin) + 8,
+def functions(expression, *args):
+    x = sp.symbols('x')
+    f = sp.sympify(expression)
+    
+    if len(args) == 1:
+        result = f.subs(x, args[0])
+    elif len(args) == 2:
+        result = (f.subs(x, args[0]), f.subs(x, args[1]))
+    else:
+        result = None  # Возвращаем None, если передано неверное количество аргументов
+    
+    return result
 
 
 def comprision(f1,f2,arr,x1,x2):

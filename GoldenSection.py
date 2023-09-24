@@ -7,6 +7,8 @@ def calculateGoldenSectionX(a,b):
     x2 = a + b - x1
     return x1, x2
 
+
+expression = input("Введите математическое выражение (используйте 'x' как переменную): ")
 a = 1.5
 b = 2
 eps = 0.02
@@ -17,7 +19,7 @@ table = []  # Создаем пустую таблицу для хранения
 
 while (b - a) / 2 > eps:
     x1, x2 = calculateGoldenSectionX(a, b)
-    f1, f2 = OptimModule.functions(x1, x2)
+    f1, f2 = OptimModule.functions(expression, x1, x2)
     sr = "f(x1)>f(x2)" if f1 > f2 else "f(x1)<f(x2)"
 
     row = [i, a, b, (b - a) / 2, x1, x2, f1, f2, sr]
@@ -39,4 +41,4 @@ print(tabulate(table, headers=headers, tablefmt="grid"))
 
 xMin = (b+a)/2
 print("x*=", xMin)
-print("y*",OptimModule.functions(xMin))
+print("y*",OptimModule.functions(expression,xMin))
