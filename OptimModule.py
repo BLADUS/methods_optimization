@@ -23,6 +23,16 @@ def comprision(f1,f2,arr,x1,x2):
     else:
         arr[1]=x2
 
+def check_unimodality(expression):
+    x = sp.symbols('x')
+    f = sp.sympify(expression)
+
+    # Вычисляем первую и вторую производные
+    f_prime = sp.diff(f, x)
+    f_double_prime = sp.diff(f_prime, x)
+
+    return f_prime, f_double_prime
+
 
 
 

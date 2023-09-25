@@ -18,9 +18,10 @@ def calculateFibonachiX(a, b, n, n1, n2):
     return x1, x2
 
 
-a = -0.6
-b = 1
-eps = 0.1
+expression = input("Введите математическое выражение (используйте 'x' как переменную): ")
+a = input("Введите левую границу a: ")
+b =  input("Введите правую границу b: ")
+eps = input("Введите точность eps: ")
 i=1
 
 table = []  # Создаем пустую таблицу для хранения данных
@@ -28,7 +29,7 @@ table = []  # Создаем пустую таблицу для хранения
 
 while (b - a) / 2 > eps:
     x1, x2 = calculateFibonachiX(a, b, 6, 7, 8)
-    f1, f2 = OptimModule.functions(x1, x2)
+    f1, f2 = OptimModule.functions(expression, x1, x2)
     sr = ">" if f1 > f2 else "<"
 
     row = [i, a, b, (b - a) / 2, x1, x2, f1, f2, sr]
@@ -50,4 +51,4 @@ print(tabulate(table, headers=headers, tablefmt="grid"))
 
 xMin = (b+a)/2
 print("x* =", xMin)
-print("y* =",OptimModule.functions(xMin))
+print("y* =",OptimModule.functions(expression, xMin))

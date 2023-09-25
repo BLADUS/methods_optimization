@@ -9,9 +9,9 @@ def calculateGoldenSectionX(a,b):
 
 
 expression = input("Введите математическое выражение (используйте 'x' как переменную): ")
-a = 1.5
-b = 2
-eps = 0.02
+a = float(input("Введите левую границу a: "))
+b =  float(input("Введите правую границу b: "))
+eps = float(input("Введите точность eps: "))
 i=1
 
 table = []  # Создаем пустую таблицу для хранения данных
