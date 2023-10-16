@@ -1,11 +1,15 @@
 import math
 from tabulate import tabulate
 import sympy as sp
+import re
 
 
 def functions(expression, *args):
     x = sp.symbols('x')
     f = sp.sympify(expression)
+    
+    # Замените символ "e" на число Эйлера
+    f = f.replace(sp.E, sp.exp(1))
     
     if len(args) == 1:
         result = f.subs(x, args[0])
@@ -23,15 +27,28 @@ def comprision(f1,f2,arr,x1,x2):
     else:
         arr[1]=x2
 
-def check_unimodality(expression):
+def derivative(expression):
+    # Определите переменную символа 'x'
     x = sp.symbols('x')
-    f = sp.sympify(expression)
 
-    # Вычисляем первую и вторую производные
-    f_prime = sp.diff(f, x)
-    f_double_prime = sp.diff(f_prime, x)
+    try:
+        # Добавьте операторы умножения перед символами 'x'
+        expression = re.sub(r'(?<=[0-9a-zA-Z)])x', r'*x', expression)
+        # Замените неявные умножения на явные
+        expression = expression.replace("^", "**")
 
-    return f_prime, f_double_prime
+        # Преобразуйте введенное выражение в символьное выражение
+        f = sp.sympify(expression)
+
+        # Вычислите производную
+        derivative = sp.diff(f, x)
+
+        # Представьте производную в нормальном виде
+        normalized_derivative = sp.simplify(derivative)
+
+        return normalized_derivative
+    except sp.SympifyError:
+        return "Ошибка ввода. Убедитесь, что введенное выражение корректно."
 
 
 
