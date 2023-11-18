@@ -8,7 +8,7 @@ def calculateGoldenSectionX(a,b):
     return x1, x2
 
 
-expression = input("Введите математическое выражение (используйте 'x' как переменную): ")
+expression = '2.7**(-x/2)-x**3/2+2*x'
 a = float(input("Введите левую границу a: "))
 b =  float(input("Введите правую границу b: "))
 eps = float(input("Введите точность eps: "))

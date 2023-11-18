@@ -1,9 +1,10 @@
 import sympy as sp
+import OptimModule
 
 def newton_method():
     # Введите начальную точку и точность
     x0 = float(input("Введите начальную точку x0: "))
-    tolerance = 0.0001
+    tolerance = 0.0000001
 
     # Определите символьную переменную x
     x = sp.symbols('x')
@@ -31,7 +32,9 @@ def newton_method():
 
         # Проверьте условие остановки
         if abs(f_prime_value) < tolerance:
-            print(f"Решение найдено: x = {xk}")
+            expression = '2.7**(-x/2)-x**3/2+2*x'
+            print("x*=", xk)
+            print("y*",OptimModule.functions(expression,xk))
             break
 
         # Обновите x0 для следующего шага
